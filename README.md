@@ -91,7 +91,7 @@ Bash
 download
 content_copy
 expand_less
-git clone https://github.com/yourusername/sparkle-pro.git
+git clone https://github.com/EMma-SH/sparkle-pro.git
 
 Open the file:
 Simply double-click index.html to view it in any modern web browser.
