@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPARKLE PRO | Professional Cleaning Services</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0070f3; /* Trust Blue */
+            --secondary: #10b981; /* Fresh Green */
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--white); color: var(--dark); overflow-x: hidden; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: sticky; top: 0; background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px); padding: 15px 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; box-shadow: var(--shadow);
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--dark); font-weight: 600; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .btn-call { background: var(--primary); color: white !important; padding: 10px 20px; border-radius: 8px; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 100px 5% 60px;
+            display: grid; grid-template-columns: 1fr 1fr;
+            align-items: center; gap: 50px;
+            max-width: 1400px; margin: 0 auto;
+        }
+        .hero-text h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 20px; color: var(--dark); }
+        .hero-text h1 span { color: var(--primary); }
+        .hero-text p { font-size: 1.1rem; color: #64748b; margin-bottom: 30px; }
+        
+        /* --- QUOTE CALCULATOR (High Conversion) --- */
+        .calculator-card {
+            background: var(--white); padding: 30px; border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #f1f5f9;
+        }
+        .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .calc-group label { display: block; font-size: 0.8rem; font-weight: 700; margin-bottom: 8px; text-transform: uppercase; }
+        .calc-group select, .calc-group input { 
+            width: 100%; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px; outline: none;
+        }
+        .price-display { 
+            background: #f0f9ff; padding: 20px; border-radius: 12px; text-align: center;
+            margin-top: 20px; border: 2px dashed var(--primary);
+        }
+        .price-amount { font-size: 2rem; font-weight: 800; color: var(--primary); }
+
+        /* --- SERVICES --- */
+        .services { padding: 100px 5%; background: var(--light); text-align: center; }
+        .section-tag { color: var(--primary); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; }
+        .services-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; margin-top: 50px; 
+        }
+        .service-card {
+            background: white; padding: 40px; border-radius: 15px; transition: 0.3s;
+            text-align: left; box-shadow: var(--shadow);
+        }
+        .service-card:hover { transform: translateY(-10px); border-bottom: 4px solid var(--secondary); }
+        .service-card h3 { margin: 15px 0; font-size: 1.4rem; }
+
+        /* --- TRUST SECTION --- */
+        .trust-bar { padding: 40px 5%; display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; opacity: 0.6; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 968px) {
+            .hero { grid-template-columns: 1fr; text-align: center; padding-top: 50px; }
+            .nav-links { display: none; }
+            .hero-text h1 { font-size: 2.5rem; }
+        }
+
+        /* --- FOOTER CTA --- */
+        .cta-banner {
+            background: var(--primary); color: white; padding: 80px 5%;
+            text-align: center; border-radius: 0;
+        }
+        .btn-white {
+            background: white; color: var(--primary); padding: 18px 40px;
+            border-radius: 50px; text-decoration: none; font-weight: 800;
+            display: inline-block; margin-top: 30px; transition: 0.3s;
+        }
+        .btn-white:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
+
+        .floating-call {
+            position: fixed; bottom: 20px; right: 20px; background: var(--secondary);
+            color: white; padding: 15px 25px; border-radius: 50px; 
+            box-shadow: 0 10px 20px rgba(16,185,129,0.3); text-decoration: none;
+            font-weight: 800; z-index: 1000; display: flex; align-items: center; gap: 10px;
+        }
+
+        /* --- HOW IT WORKS --- */
+        .how-it-works {
+            padding: 100px 5%; background: white;
+            text-align: center; max-width: 1400px; margin: 0 auto;
+        }
+        .steps-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px; margin-top: 50px;
+        }
+        .step-card {
+            padding: 30px; text-align: center;
+            border-radius: 15px; background: var(--light);
+            transition: 0.3s;
+        }
+        .step-number {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 60px; height: 60px; background: var(--primary);
+            color: white; font-size: 2rem; font-weight: 800; border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonials {
+            padding: 100px 5%; background: var(--light);
+            text-align: center;
+        }
+        .testimonials-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px; margin-top: 50px; max-width: 1200px; margin-left: auto; margin-right: auto;
+        }
+        .testimonial-card {
+            background: white; padding: 30px; border-radius: 15px;
+            box-shadow: var(--shadow); text-align: left;
+            border-left: 5px solid var(--secondary);
+        }
+        .stars { color: #fbbf24; font-size: 1.2rem; margin-bottom: 10px; }
+        .testimonial-text { color: #64748b; margin-bottom: 15px; font-style: italic; }
+        .testimonial-author {
+            font-weight: 800; color: var(--dark); font-size: 0.95rem;
+        }
+
+        /* --- FAQ --- */
+        .faq-section {
+            padding: 100px 5%; background: white;
+            max-width: 900px; margin: 0 auto;
+        }
+        .faq-item {
+            background: var(--light); padding: 25px; border-radius: 12px;
+            margin-bottom: 20px; cursor: pointer; transition: 0.3s;
+        }
+        .faq-item:hover { background: #f1f5f9; }
+        .faq-question {
+            font-weight: 800; font-size: 1.1rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-toggle { font-size: 1.5rem; }
+        .faq-answer {
+            display: none; margin-top: 15px; color: #64748b; line-height: 1.6;
+        }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* --- TEAM --- */
+        .team-section {
+            padding: 100px 5%; background: var(--light);
+            text-align: center;
+        }
+        .team-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px; margin-top: 50px; max-width: 1200px; margin-left: auto; margin-right: auto;
+        }
+        .team-member {
+            background: white; padding: 30px; border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+        .member-avatar {
+            width: 120px; height: 120px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            margin: 0 auto 20px; display: flex; align-items: center;
+            justify-content: center; font-size: 3rem; color: white;
+        }
+        .member-name { font-weight: 800; font-size: 1.2rem; margin-bottom: 5px; }
+        .member-role { color: var(--primary); font-weight: 600; font-size: 0.9rem; }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            padding: 80px 5%; background: white;
+            max-width: 1200px; margin: 0 auto; text-align: center;
+        }
+        .contact-info {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px; margin-top: 50px;
+        }
+        .contact-item {
+            background: var(--light); padding: 30px; border-radius: 15px;
+        }
+        .contact-item-icon { font-size: 2.5rem; margin-bottom: 15px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--dark); color: white; padding: 40px 5%; text-align: center;
+        }
+        footer p { opacity: 0.7; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">✨ SPARKLE<span>PRO</span></div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#how-it-works">How it Works</a>
+            <a href="#reviews">Reviews</a>
+            <a href="tel:5550123" class="btn-call">📞 (555) 012-3456</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-text">
+            <span class="section-tag">Top-Rated in NYC</span>
+            <h1>Spotless Home. <span>Zero Effort.</span></h1>
+            <p>Experience the joy of coming home to a perfectly clean house. Professional, background-checked cleaners at your service.</p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <div style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                    ✅ Fully Insured
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; font-weight: 600;">
+                    ✅ Eco-Friendly
+                </div>
+            </div>
+        </div>
+
+        <div class="calculator-card">
+            <h2 style="margin-bottom: 20px; font-size: 1.5rem;">Instant Pricing ⚡</h2>
+            <div class="calc-grid">
+                <div class="calc-group">
+                    <label>Home Size</label>
+                    <select id="rooms" onchange="calculate()">
+                        <option value="1">1 Bedroom</option>
+                        <option value="2">2 Bedrooms</option>
+                        <option value="3">3 Bedrooms</option>
+                        <option value="4">4+ Bedrooms</option>
+                    </select>
+                </div>
+                <div class="calc-group">
+                    <label>Service Type</label>
+                    <select id="type" onchange="calculate()">
+                        <option value="100">Standard Clean</option>
+                        <option value="180">Deep Clean</option>
+                        <option value="250">Move In/Out</option>
+                    </select>
+                </div>
+            </div>
+            <div class="price-display">
+                <p style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase;">Estimated Total</p>
+                <div class="price-amount" id="total">$100</div>
+            </div>
+            <button class="btn-white" style="width: 100%; background: var(--primary); color: white; border: none; cursor: pointer; margin-top: 15px;">Book This Clean</button>
+        </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <div class="trust-bar">
+        <span style="font-weight: 800;">GOOGLE ⭐ 4.9/5</span>
+        <span style="font-weight: 800;">YELP 🏆 TOP RATED</span>
+        <span style="font-weight: 800;">FACEBOOK ✅ VERIFIED</span>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services" class="services">
+        <span class="section-tag">What We Offer</span>
+        <h2 style="font-size: 2.5rem; margin-top: 10px;">Cleaning for every need</h2>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div style="font-size: 2rem;">🏠</div>
+                <h3>Residential Cleaning</h3>
+                <p>Weekly or bi-weekly scheduled cleaning for busy families and professionals.</p>
+            </div>
+            <div class="service-card">
+                <div style="font-size: 2rem;">🏢</div>
+                <h3>Commercial & Office</h3>
+                <p>Impress your clients with a pristine workspace. Tailored for small to large offices.</p>
+            </div>
+            <div class="service-card">
+                <div style="font-size: 2rem;">✨</div>
+                <h3>Deep Cleaning</h3>
+                <p>A top-to-bottom scrub including baseboards, inside ovens, and behind appliances.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="how-it-works">
+        <span class="section-tag">Simple Process</span>
+        <h2 style="font-size: 2.5rem; margin-top: 10px;">How it works</h2>
+        
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Book Online</h3>
+                <p>Select your service, date, and time in seconds. Get an instant quote with no hidden fees.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">We Confirm</h3>
+                <p>Our team confirms your booking and sends you cleaner details 24 hours before arrival.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Sit Back & Relax</h3>
+                <p>Professional cleaners arrive on time and work their magic. Track progress with live updates.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 style="font-size: 1.3rem; margin-bottom: 15px;">Rate & Review</h3>
+                <p>Leave feedback and earn loyalty points. Schedule your next cleaning with one click.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS / REVIEWS -->
+    <section id="reviews" class="testimonials">
+        <span class="section-tag">Client Love</span>
+        <h2 style="font-size: 2.5rem; margin-top: 10px;">What our customers say</h2>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"SPARKLE PRO saved my life! I work 12-hour shifts and coming home to a spotless apartment is incredible. Highly recommend!"</p>
+                <p class="testimonial-author">— Sarah Martinez, NYC</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Professional, courteous, and thorough. They cleaned areas I didn't even know existed. Worth every penny!"</p>
+                <p class="testimonial-author">— James Chen, Brooklyn</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Best commercial cleaning service we've used. Our clients always comment on how clean the office is now!"</p>
+                <p class="testimonial-author">— Michael Thompson, Manhattan</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Eco-friendly products, reliable team, excellent customer service. Been using them for 2 years!"</p>
+                <p class="testimonial-author">— Jessica Low, Queens</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"The move-in cleaning was immaculate. Every corner was spotless. Highly professional team!"</p>
+                <p class="testimonial-author">— David Rodriguez, Bronx</p>
+            </div>
+            <div class="testimonial-card">
+                <div class="stars">⭐⭐⭐⭐⭐</div>
+                <p class="testimonial-text">"Finally found a cleaning service I can trust! They respect my home and do amazing work."</p>
+                <p class="testimonial-author">— Emily Watson, Staten Island</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section">
+        <span class="section-tag" style="display: block; text-align: center;">Common Questions</span>
+        <h2 style="font-size: 2.5rem; margin-top: 10px; text-align: center; margin-bottom: 50px;">Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Are your cleaners background-checked?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Yes! All our cleaners pass comprehensive background checks and are fully insured. Your safety and security are our top priority.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What cleaning products do you use?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                We use eco-friendly, non-toxic cleaning products that are safe for children, pets, and the environment. We can also use your preferred products if you like.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>How much does cleaning cost?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Pricing depends on your home size and service type. Use our instant calculator on the homepage to get an accurate quote. Standard clean starts at $100.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Can I schedule last-minute cleanings?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Absolutely! If we have availability, we can schedule a cleaning within 24 hours. Use our app or call us at (555) 012-3456 to check availability.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>What if I'm not satisfied with the cleaning?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                We guarantee 100% satisfaction. If you're not happy with any aspect of our service, we'll re-clean those areas at no charge.
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <span>Do you offer recurring cleaning schedules?</span>
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                Yes! We offer weekly, bi-weekly, and monthly scheduling options. Recurring customers enjoy a 10% discount on all services.
+            </div>
+        </div>
+    </section>
+
+    <!-- TEAM SECTION -->
+    <section class="team-section">
+        <span class="section-tag">Our Team</span>
+        <h2 style="font-size: 2.5rem; margin-top: 10px;">Meet our founders</h2>
+        
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">👩‍💼</div>
+                <h3 class="member-name">Sarah Johnson</h3>
+                <p class="member-role">Founder & CEO</p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 10px;">15+ years in professional cleaning. Passionate about quality service and customer satisfaction.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">👨‍💼</div>
+                <h3 class="member-name">Marcus Williams</h3>
+                <p class="member-role">Operations Manager</p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 10px;">Expert in logistics and team management. Ensures every cleaning is done right the first time.</p>
+            </div>
+            <div class="team-member">
+                <div class="member-avatar">👩‍🔧</div>
+                <h3 class="member-name">Lisa Park</h3>
+                <p class="member-role">Quality Assurance Lead</p>
+                <p style="color: #64748b; font-size: 0.9rem; margin-top: 10px;">Quality control specialist. Personally inspects every cleaning to maintain our 5-star standard.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <span class="section-tag">Get in Touch</span>
+        <h2 style="font-size: 2.5rem; margin-top: 10px;">Contact us</h2>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-item-icon">📞</div>
+                <h3 style="font-weight: 800; margin-bottom: 10px;">Phone</h3>
+                <p style="color: #64748b;">Call us anytime<br><strong style="color: var(--primary);">(555) 012-3456</strong></p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon">📧</div>
+                <h3 style="font-weight: 800; margin-bottom: 10px;">Email</h3>
+                <p style="color: #64748b;">We'll respond within 1 hour<br><strong style="color: var(--primary);">hello@sparklepro.com</strong></p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon">📍</div>
+                <h3 style="font-weight: 800; margin-bottom: 10px;">Location</h3>
+                <p style="color: #64748b;">Serving all of NYC<br><strong style="color: var(--primary);">Manhattan • Brooklyn • Queens</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-banner">
+        <h2>Ready for a cleaner space?</h2>
+        <p style="margin-top: 10px; opacity: 0.9;">Join 1,000+ happy customers in the local area.</p>
+        <a href="#" class="btn-white">Schedule My Cleaning</a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2024 SPARKLE PRO. All rights reserved.</p>
+        <p>Fully Insured • Background Checked • Eco-Friendly</p>
+        <p style="margin-top: 20px; opacity: 0.5; font-size: 0.9rem;">Licensed & Bonded • Member of NYC Service Providers Association</p>
+    </footer>
+
+    <a href="tel:5550123" class="floating-call">
+        <span>📞</span> Book via Call
+    </a>
+
+    <script>
+        // LIVE CALCULATOR LOGIC
+        function calculate() {
+            const rooms = parseInt(document.getElementById('rooms').value);
+            const basePrice = parseInt(document.getElementById('type').value);
+            
+            // Logic: Base price + $30 per additional room
+            const total = basePrice + ((rooms - 1) * 30);
+            
+            document.getElementById('total').innerText = '$' + total;
+        }
+
+        // FAQ TOGGLE
+        function toggleFaq(element) {
+            element.parentElement.classList.toggle('active');
+            const toggle = element.querySelector('.faq-toggle');
+            toggle.innerText = toggle.innerText === '+' ? '−' : '+';
+        }
+
+        // Scroll Animation Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        document.querySelectorAll('.service-card, .step-card, .testimonial-card, .team-member').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = '0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
