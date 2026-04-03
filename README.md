@@ -1,5 +1,3 @@
-This is a professional README.md file tailored for your cleaning business website project. It’s designed to look great on GitHub or in a project portfolio.
-
 ✨ Sparkle Pro - High-Converting Cleaning Landing Page
 
 Sparkle Pro is a premium, mobile-responsive landing page designed specifically for residential and commercial cleaning businesses. Built with a focus on conversion psychology, it features an interactive pricing calculator to turn visitors into leads instantly.
